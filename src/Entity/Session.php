@@ -29,11 +29,11 @@ class Session
     private ?int $places = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
-    private ?formateur $formateur = null;
+    private ?Formateur $formateur = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?formation $formation = null;
+    private ?Formation $formation = null;
 
     /**
      * @var Collection<int, Stagiaire>
@@ -106,24 +106,24 @@ class Session
         return $this;
     }
 
-    public function getFormateur(): ?formateur
+    public function getFormateur(): ?Formateur
     {
         return $this->formateur;
     }
 
-    public function setFormateur(?formateur $formateur): static
+    public function setFormateur(?Formateur $formateur): static
     {
         $this->formateur = $formateur;
 
         return $this;
     }
 
-    public function getFormation(): ?formation
+    public function getFormation(): ?Formation
     {
         return $this->formation;
     }
 
-    public function setFormation(?formation $formation): static
+    public function setFormation(?Formation $formation): static
     {
         $this->formation = $formation;
 

@@ -16,7 +16,6 @@ class FormationController extends AbstractController
         $formations = $formationRepository->findBy([],["intitule" => "ASC"]);
 
         return $this->render('formation/index.html.twig', [
-            'controller_name' => 'FormationController',
             'formations' => $formations
         ]);
     }

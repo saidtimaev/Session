@@ -25,7 +25,7 @@ class Modulee
     private Collection $programmes;
 
     #[ORM\ManyToOne(inversedBy: 'modulees')]
-    private ?categorie $categorie = null;
+    private ?Categorie $categorie = null;
 
     public function __construct()
     {
@@ -79,12 +79,12 @@ class Modulee
         return $this;
     }
 
-    public function getCategorie(): ?categorie
+    public function getCategorie(): ?Categorie
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?categorie $categorie): static
+    public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
 

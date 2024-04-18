@@ -18,11 +18,11 @@ class Programme
 
     #[ORM\ManyToOne(inversedBy: 'programmes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?session $session = null;
+    private ?Session $session = null;
 
     #[ORM\ManyToOne(inversedBy: 'programmes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?modulee $modulee = null;
+    private ?Modulee $modulee = null;
 
     public function getId(): ?int
     {
@@ -41,24 +41,24 @@ class Programme
         return $this;
     }
 
-    public function getSession(): ?session
+    public function getSession(): ?Session
     {
         return $this->session;
     }
 
-    public function setSession(?session $session): static
+    public function setSession(?Session $session): static
     {
         $this->session = $session;
 
         return $this;
     }
 
-    public function getModulee(): ?modulee
+    public function getModulee(): ?Modulee
     {
         return $this->modulee;
     }
 
-    public function setModulee(?modulee $modulee): static
+    public function setModulee(?Modulee $modulee): static
     {
         $this->modulee = $modulee;
 
