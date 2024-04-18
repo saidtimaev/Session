@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des formateurs{% endblock %}
+
+{% block body %}
+
+    <h1>Formateurs : </h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Sessions en cours</th>
+                <th>Sessions prévues</th>
+                <th>Sessions passées</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for formateur in formateurs %}
+                <tr>
+                    <td><a href="">{{formateur.nom|upper}}</a><br></td>
+                    <td><a href="">{{formateur.prenom}}</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
