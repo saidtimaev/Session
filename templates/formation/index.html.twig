@@ -4,8 +4,10 @@
 
 {% block body %}
 
+    <h1>Sessions : </h1>
+
     {% for formation in formations %}
-        <a href="">{{formation.intitule}}</a><br>
+        <a href="{{ path('sessionsParFormation', {'id': formation.id}) }}">{{formation.intitule}}</a><br>
     {% endfor %}
 
 {% endblock %}
