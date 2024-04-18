@@ -12,6 +12,20 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('app_formation') }}">Accueil</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block body %}
+                
+            {% endblock %}
+        </main>
+        <footer>
+            <p>Session 2024</p>
+        </footer>
     </body>
 </html>
