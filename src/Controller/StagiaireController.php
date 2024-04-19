@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Stagiaire;
 use App\Repository\StagiaireRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StagiaireController extends AbstractController
 {
@@ -16,6 +17,14 @@ class StagiaireController extends AbstractController
 
         return $this->render('stagiaire/index.html.twig', [
             'stagiaires'=> $stagiaires
+        ]);
+    }
+
+    #[Route('stagiaire/{id}', name: 'show_stagiaire')]
+    public function show(Stagiaire $stagiaire){
+        
+        return $this->render('stagiaire/show.html.twig', [
+            'stagiaire'=> $stagiaire
         ]);
     }
 }

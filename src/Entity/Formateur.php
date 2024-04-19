@@ -30,6 +30,9 @@ class Formateur
     #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'formateur')]
     private Collection $sessions;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sexe = null;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
@@ -102,6 +105,18 @@ class Formateur
                 $session->setFormateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(?string $sexe): static
+    {
+        $this->sexe = $sexe;
 
         return $this;
     }

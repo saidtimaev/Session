@@ -40,6 +40,9 @@ class Stagiaire
     #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'stagiaires')]
     private Collection $sessions;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sexe = null;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
@@ -145,6 +148,18 @@ class Stagiaire
         if ($this->sessions->removeElement($session)) {
             $session->removeStagiaire($this);
         }
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(?string $sexe): static
+    {
+        $this->sexe = $sexe;
 
         return $this;
     }

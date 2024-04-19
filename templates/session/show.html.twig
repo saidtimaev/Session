@@ -24,8 +24,8 @@
             <tbody>
                 {% for stagiaire in session.stagiaires %}
                     <tr>
-                        <td><a href="">{{stagiaire.nom|upper}}</a></td>
-                        <td><a href="">{{stagiaire.prenom}}</a></td>
+                        <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.nom|upper}}</a></td>
+                        <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}}</a></td>
                     </tr> <br>
                 {% endfor %}
             </tbody>
