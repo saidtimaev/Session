@@ -12,10 +12,18 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(SessionRepository $sessionRepository): Response
     {
-        $sessions = $sessionRepository->findBy([],['dateDebut' => 'DESC']);
+        $dateActuelle = new \DateTime();
+
+        $sessionsPassees = $sessionRepository->findSessionsPassees($dateActuelle->format('Y-m-d'));
+
+        $sessionsEnCours = $sessionRepository->findSessionsEnCours($dateActuelle->format('Y-m-d'));
+
+        $sessionsPrevues = $sessionRepository->findSessionsPrevues($dateActuelle->format('Y-m-d'));
 
         return $this->render('home/index.html.twig', [
-            'sessions' => $sessions
+            'sessionsPassees' => $sessionsPassees,
+            'sessionsEnCours' => $sessionsEnCours,
+            'sessionsPrevues' => $sessionsPrevues
         ]);
     }
 

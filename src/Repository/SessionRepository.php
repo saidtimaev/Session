@@ -21,20 +21,48 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
-    //    /**
-    //     * @return Session[] Returns an array of Session objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       /**
+        * @return Session[] Returns an array of Session objects
+        */
+       public function findSessionsPassees($value): array
+       {
+           return $this->createQueryBuilder('s')
+               ->andWhere('s.dateFin < :val')
+               ->setParameter('val', $value)
+               ->orderBy('s.dateFin', 'DESC')
+               ->setMaxResults(null)
+               ->getQuery()
+               ->getResult()
+           ;
+       }
+
+              /**
+        * @return Session[] Returns an array of Session objects
+        */
+        public function findSessionsEnCours($value): array
+        {
+            return $this->createQueryBuilder('s')
+                ->andWhere(':val >= s.dateDebut')
+                ->andWhere(':val <= s.dateFin')
+                ->setParameter('val', $value)
+                ->orderBy('s.dateFin', 'DESC')
+                ->setMaxResults(null)
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
+        public function findSessionsPrevues($value): array
+        {
+            return $this->createQueryBuilder('s')
+                ->andWhere(':val < s.dateDebut')
+                ->setParameter('val', $value)
+                ->orderBy('s.dateFin', 'ASC')
+                ->setMaxResults(null)
+                ->getQuery()
+                ->getResult()
+            ;
+        }
 
     //    public function findOneBySomeField($value): ?Session
     //    {
