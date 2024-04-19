@@ -7,9 +7,9 @@
     <h1>Formateurs : </h1>
     
 
-    <table>
+    <table class="table table-striped table-bordered">
         <thead>
-            <tr class="table table-striped table-bordered"> 
+            <tr class="table-primary"> 
                 <th>Formateur</th>
                 <th>Sessions en cours</th>
                 <th>Sessions prévues</th>
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             {% for formateur in formateurs %}
-                <tr class="table-primary">
+                <tr >
                     <td><a href="{{ path('show_formateur', {'id': formateur.id})}}">{{formateur.nom|upper}} {{formateur.prenom}}</a><br></td>
                     <td></td>
                     <td></td>

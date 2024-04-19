@@ -14,7 +14,7 @@ class FormateurController extends AbstractController
     public function index(FormateurRepository $formateurRepository): Response
     {
         $formateurs = $formateurRepository->findBy([],['nom'=>'ASC']);
-
+        
         return $this->render('formateur/index.html.twig', [
             'formateurs'=> $formateurs
         ]);
