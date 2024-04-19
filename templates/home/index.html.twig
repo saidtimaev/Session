@@ -8,9 +8,9 @@
 
     <h1>Sessions : </h1>
 
-    <table>
+    <table class="table table-striped table-bordered">
         <thead>
-            <tr>
+            <tr class="table-primary">
                 <th>Session</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
@@ -19,10 +19,10 @@
         <tbody>
             {% for session in sessions %}
                 <tr>
-                    <td><a href="">{{session.intitule}}</a><br></td>
-                    <td><a href="">{{session.dateDebut|date("d/m/Y")}}</a></td>
-                    <td><a href="">{{session.dateFin|date("d/m/Y")}}</a></td>
-                    <td></td>
+                    <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a><br></td>
+                    <td>{{session.dateDebut|date("d/m/Y")}}</td>
+                    <td>{{session.dateFin|date("d/m/Y")}}</td>
+                    
                 </tr>
             {% endfor %}
         </tbody>

@@ -16,7 +16,7 @@
     {% if session.stagiaires | length > 0  %}
         <table class="table table-striped">
             <thead>  
-                <tr>
+                <tr class="table-primary">
                     <th>Nom</th>
                     <th>Prénom</th>
                 </tr>
@@ -36,9 +36,9 @@
 
     <h3>Programme</h3>
     {% if session.programmes | length > 0  %}
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
             <thead>  
-                <tr>
+                <tr class="table-primary">
                     <th>Module</th>
                     <th>Durée en jours</th>
                 </tr>
