@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories de module{% endblock %}
+
+{% block body %}
+
+    <h1>Catégories : </h1>
+
+    {% for categorie in categories %}
+        <a href="">{{categorie.nom}}</a><br>
+    {% endfor %}
+
+{% endblock %}
