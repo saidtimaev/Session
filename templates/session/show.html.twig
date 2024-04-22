@@ -19,6 +19,7 @@
                 <tr class="table-primary">
                     <th>Nom</th>
                     <th>Prénom</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,12 +27,36 @@
                     <tr>
                         <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.nom|upper}}</a></td>
                         <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}}</a></td>
+                        <td><a href="">Désinscrire</a></td>
                     </tr> <br>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}    
         <p>Aucun stagiaire participe à cette session</p>
+    {% endif %}
+
+    {% if stagiaires|length > 0 %}
+        <h3>Stagiaires non inscrits</h3>
+        <table class="table table-striped">
+            <thead>  
+                <tr class="table-primary">
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for stagiaire in stagiaires %}
+            
+                    <tr>
+                        <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.nom|upper}}</a></td>
+                        <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}}</a></td>
+                        <td><a href="">Inscrire</a></td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     {% endif %}
 
     <h3>Programme</h3>

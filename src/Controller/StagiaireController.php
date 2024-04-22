@@ -14,6 +14,7 @@ class StagiaireController extends AbstractController
     public function index(StagiaireRepository $stagiaireRepository): Response
     {
         $stagiaires = $stagiaireRepository->findBy([],['nom'=>'ASC']);
+        // dump($stagiaires->sessions);die;
 
         return $this->render('stagiaire/index.html.twig', [
             'stagiaires'=> $stagiaires

@@ -17,7 +17,7 @@
             {% for stagiaire in stagiaires %}
                 <tr>
                     <td><a href="{{path('show_stagiaire', {'id' : stagiaire.id})}}">{{stagiaire.nom|upper}} {{stagiaire.prenom}}</a><br></td>
-                    <td>???</td>
+                    <td>{{ stagiaire.sessions|length }}</td>
                 </tr>
             {% endfor %}
         </tbody>
