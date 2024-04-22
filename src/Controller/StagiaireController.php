@@ -13,7 +13,7 @@ class StagiaireController extends AbstractController
     #[Route('/stagiaire', name: 'app_stagiaire')]
     public function index(StagiaireRepository $stagiaireRepository): Response
     {
-        $stagiaires = $stagiaireRepository->findBy([],['nom'=>'ASC']);
+        // $stagiaires = $stagiaireRepository->findBy([],['nom'=>'ASC']);
         // dump($stagiaires->sessions);die;
 
         $dateActuelle = new \DateTime();
