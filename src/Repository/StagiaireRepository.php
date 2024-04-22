@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Stagiaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\GroupBy;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -23,32 +24,26 @@ class StagiaireRepository extends ServiceEntityRepository
 
 
     
-    public function NbSessionsPrevuesStagiaires($dateDebut)
+    public function NbSessionsStagiaires($dateActuelle)
     {
-        $em = $this->getEntityManager();
-        $sub = $em->createQueryBuilder();
+        $conn = $this->getEntityManager()->getConnection();
 
-        $qb = $sub;
-        // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
-        $qb->select('s')
-            ->from('App\Entity\Session', 's')
-            ->leftJoin('s.sessions', 'se')
-            ->where('s.dateDebut = :dateDebut');
-        
-        $sub = $em->createQueryBuilder();
-        // sélectionner tous les stagiaires qui ne SONT PAS (NOT IN) dans le résultat précédent
-        // on obtient donc les stagiaires non inscrits pour une session définie
-        $sub->select('st')
-            ->from('App\Entity\Stagiaire', 'st')
-            ->where($sub->expr()->notIn('st.id', $qb->getDQL()))
-            // requête paramétrée
-            ->setParameter('id', $session_id)
-            // trier la liste des stagiaires sur le nom de famille
-            ->orderBy('st.nom');
-        
-        // renvoyer le résultat
-        $query = $sub->getQuery();
-        return $query->getResult();
+        $sql = '
+            SELECT stagiaire_id as id, nom, prenom,
+            (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_debut < :dateActuelle AND date_fin > :dateActuelle GROUP BY stagiaire_id) AS sessionEnCours,
+            (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_fin < :dateActuelle GROUP BY stagiaire_id) AS sessionPassees,
+            (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_debut > :dateActuelle GROUP BY stagiaire_id) AS sessionPrevues
+            FROM session_stagiaire
+            INNER JOIN session ON session_stagiaire.session_id = session.id
+            INNER JOIN stagiaire ON session_stagiaire.stagiaire_id = stagiaire.id
+            GROUP BY stagiaire_id
+            ORDER BY nom ASC
+        ';
+
+        $resultSet = $conn->executeQuery($sql, ['dateActuelle' => $dateActuelle]);
+
+        return $resultSet->fetchAllAssociative();
+
     }
     
 

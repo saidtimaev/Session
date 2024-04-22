@@ -16,8 +16,14 @@ class StagiaireController extends AbstractController
         $stagiaires = $stagiaireRepository->findBy([],['nom'=>'ASC']);
         // dump($stagiaires->sessions);die;
 
+        $dateActuelle = new \DateTime();
+
+        $stagiairesSessionsPrevues = $stagiaireRepository->NbSessionsStagiaires($dateActuelle->format('Y-m-d'));
+
+        // dd(($stagiairesSessionsPrevues));die;
+
         return $this->render('stagiaire/index.html.twig', [
-            'stagiaires'=> $stagiaires
+            'stagiairesSessionsPrevues' => $stagiairesSessionsPrevues
         ]);
     }
 

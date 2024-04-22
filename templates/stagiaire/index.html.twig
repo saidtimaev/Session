@@ -11,13 +11,17 @@
             <tr class="table-primary">
                 <th>Stagiaire</th>
                 <th>Nombre de sessions prévues</th>
+                <th>Nombre de sessions en cours</th>
+                <th>Nombre de sessions passées</th>
             </tr>
         </thead>
         <tbody>
-            {% for stagiaire in stagiaires %}
+            {% for stagiaire in stagiairesSessionsPrevues %}
                 <tr>
-                    <td><a href="{{path('show_stagiaire', {'id' : stagiaire.id})}}">{{stagiaire.nom|upper}} {{stagiaire.prenom}}</a><br></td>
-                    <td>{{ stagiaire.sessions|length }}</td>
+                    <td><a href="{{path('show_stagiaire', {'id' : stagiaire['id']})}}">{{stagiaire['nom']|upper}} {{stagiaire['prenom']}}</a><br></td>
+                    <td>{{ stagiaire['sessionPrevues'] ? stagiaire['sessionPrevues'] : '0' }}</td>
+                    <td>{{ stagiaire['sessionEnCours'] ? stagiaire['sessionEnCours'] : '0' }}</td>
+                    <td>{{ stagiaire['sessionPassees'] ? stagiaire['sessionPassees'] : '0' }}</td>
                 </tr>
             {% endfor %}
         </tbody>
