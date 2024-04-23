@@ -55,7 +55,7 @@ class FormationController extends AbstractController
     }
 
      // Supprimer une formation
-     #[Route('/employe/{id}/delete', name:'delete_formation')]
+     #[Route('/formation/{id}/delete', name:'delete_formation')]
      public function delete(Formation $formation, EntityManagerInterface $entityManager){
          
          $entityManager->remove($formation);

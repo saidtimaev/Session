@@ -29,14 +29,14 @@ class StagiaireRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT stagiaire_id as id, nom, prenom,
+            SELECT stagiaire.id, nom, prenom,
             (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_debut < :dateActuelle AND date_fin > :dateActuelle GROUP BY stagiaire_id) AS sessionEnCours,
             (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_fin < :dateActuelle GROUP BY stagiaire_id) AS sessionPassees,
             (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_debut > :dateActuelle GROUP BY stagiaire_id) AS sessionPrevues
-            FROM session_stagiaire
-            INNER JOIN session ON session_stagiaire.session_id = session.id
-            INNER JOIN stagiaire ON session_stagiaire.stagiaire_id = stagiaire.id
-            GROUP BY stagiaire_id
+            FROM stagiaire
+            LEFT JOIN session_stagiaire ON session_stagiaire.stagiaire_id = stagiaire.id
+            LEFT JOIN session ON session_stagiaire.session_id = session.id
+            GROUP BY stagiaire.id
             ORDER BY nom ASC
         ';
 
