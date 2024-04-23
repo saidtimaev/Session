@@ -27,7 +27,7 @@
                     <td>{{session.dateFin|date("d/m/Y")}}</td>
                     <td>{{session.places}}</td>
                     <td><a href="">Afficher</a></td>
-                    <td><a href="">Modifier</a> <a href="">Supprimer</a></td>
+                    <td><a href="{{ path('edit_session', {'id': session.id})}}">Modifier</a> <a href="">Supprimer</a></td>
                 </tr>
             {% endfor %}
         </tbody>
