@@ -77,4 +77,6 @@ class StagiaireController extends AbstractController
             'stagiaire'=> $stagiaire
         ]);
     }
+
+    
 }

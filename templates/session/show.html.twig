@@ -11,6 +11,10 @@
     <p>Places disponibles : ? </p>
     <p>Début : {{session.dateDebut|date("d/m/Y")}} </p>
     <p>Fin : {{session.dateFin|date("d/m/Y")}} </p>
+
+    <h3>Formateur : </h3>
+
+    <p>Formateur</p>
     
     <h3>Stagiaires</h3>
     {% if session.stagiaires | length > 0  %}
@@ -52,7 +56,7 @@
                     <tr>
                         <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.nom|upper}}</a></td>
                         <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire.prenom}}</a></td>
-                        <td><a href="">Inscrire</a></td>
+                        <td><a href="{{ path('add_stagiaire', {'idStagiaire': stagiaire.id , 'idSession': session.id})}}">Inscrire</a></td>
                     </tr>
             {% endfor %}
             </tbody>

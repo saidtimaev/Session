@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Entity\Formation;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use App\Repository\StagiaireRepository;
@@ -11,7 +12,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 
 class SessionController extends AbstractController
 {
@@ -73,7 +77,18 @@ class SessionController extends AbstractController
         ]);
     }   
 
-    
+    #[Route('/session/stagiaire/add/{id}/{idStagiaire}', name: 'add_stagiaire')]
+    public function add(Session $session, #[MapEntity(id: 'idStagiaire')] Stagiaire $stagiaire, EntityManagerInterface $entityManager): RedirectResponse
+    {
+        $session->addStagiaire($stagiaire);
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($session);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_session',['id'=>$session->getId()]); 
+    }   
 }
 
 
