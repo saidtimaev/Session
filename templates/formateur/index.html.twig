@@ -6,6 +6,8 @@
 
     <h1>Formateurs : </h1>
     
+    <a href="{{ path('new_formateur')}}">Ajouter un formateur</a>
+
 
     <table class="table table-striped table-bordered">
         <thead>
@@ -14,6 +16,7 @@
                 <th>Sessions en cours</th>
                 <th>Sessions prévues</th>
                 <th>Sessions passées</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +26,8 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                </tr>
+                    <td><a href="{{ path('edit_formateur', {'id' : formateur.id})}}">Modifier</a> <a href="{{ path('delete_formateur', {'id' : formateur.id})}}">Supprimer</a></td>
+            
             {% endfor %}
         </tbody>
     </table>

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un formateur{% endblock %}
+
+{% block body %}
+
+
+    {{ form_start(formAddFormateur) }}
+
+        {{form_row(formAddFormateur.nom)}}
+        {{form_row(formAddFormateur.prenom)}}
+        {{form_row(formAddFormateur.email)}}
+        {{form_row(formAddFormateur.sexe)}}
+        {{form_row(formAddFormateur.valider)}}
+       
+    {{ form_end(formAddFormateur) }}
+    
+{% endblock %}
