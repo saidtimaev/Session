@@ -13,13 +13,15 @@
             <tr>
                 <th>Module</th>
                 <th>Catégorie</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for modulee in modulees %}
                 <tr>
-                    <td><a href="">{{modulee.intitule}}</a><br></td>
+                    <td>{{modulee.intitule}}<br></td>
                     <td><a href="">{{modulee.categorie.nom}}</a></td>
+                    <td><a href="{{path('edit_modulee', {'id' : modulee.id})}}">Modifier</a> <a href="{{path('delete_modulee', {'id' : modulee.id})}}">Supprimer</a></td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -53,4 +53,14 @@ class ModuleeController extends AbstractController
             'formAddModulee' => $form,
         ]);
     }
+
+    #[Route('/modulee/{id}/delete', name:'delete_modulee')]
+     public function delete(Modulee $modulee, EntityManagerInterface $entityManager){
+         
+         $entityManager->remove($modulee);
+         $entityManager->flush();
+ 
+         return $this->redirectToRoute('app_modulee');
+ 
+     }
 }
