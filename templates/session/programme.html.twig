@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un module dans la session {{session.intitule}}{% endblock %}
+
+{% block body %}
+
+
+    {{ form_start(formAddProgramme) }}
+
+        {{form_row(formAddProgramme.modulee)}}
+        {{form_row(formAddProgramme.duree)}}
+       
+    {{ form_end(formAddProgramme) }}
+    
+{% endblock %}
