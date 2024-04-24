@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un module{% endblock %}
+
+{% block body %}
+
+
+    {{ form_start(formAddModulee) }}
+
+        {{form_row(formAddModulee.intitule)}}
+        {{form_row(formAddModulee.categorie)}}
+        
+    {{ form_end(formAddModulee) }}
+    
+{% endblock %}

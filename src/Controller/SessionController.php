@@ -55,16 +55,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[Route('/session/{id}/delete', name:'delete_session')]
-     public function delete(Session $session, EntityManagerInterface $entityManager){
-        
-        $formation = $session->getFormation()->getId();
-
-         $entityManager->remove($session);
-         $entityManager->flush();
- 
-         return $this->redirectToRoute('sessionsParFormation',['id' => $formation]);
-    }
+   
 
     #[Route('/session/{id}', name: 'show_session')]
     public function show(Session $session, SessionRepository $sessionRepository): Response
@@ -77,6 +68,19 @@ class SessionController extends AbstractController
         ]);
     }   
 
+    #[Route('/session/stagiaire/delete/{id}/{idStagiaire}', name: 'delete_stagiaire_from_session')]
+    public function deleteStagiaire(Session $session, #[MapEntity(id: 'idStagiaire')] Stagiaire $stagiaire, EntityManagerInterface $entityManager): RedirectResponse
+    {
+        $session->removeStagiaire($stagiaire);
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($session);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_session',['id'=>$session->getId()]); 
+    }  
+
     #[Route('/session/stagiaire/add/{id}/{idStagiaire}', name: 'add_stagiaire')]
     public function add(Session $session, #[MapEntity(id: 'idStagiaire')] Stagiaire $stagiaire, EntityManagerInterface $entityManager): RedirectResponse
     {
@@ -88,7 +92,23 @@ class SessionController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('show_session',['id'=>$session->getId()]); 
-    }   
+    }  
+
+    #[Route('/session/{id}/delete', name:'delete_session')]
+    public function delete(Session $session, EntityManagerInterface $entityManager){
+       
+       $formation = $session->getFormation()->getId();
+
+        $entityManager->remove($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('sessionsParFormation',['id' => $formation]);
+   }
+
+
+    
+    
+    
 }
 
 
