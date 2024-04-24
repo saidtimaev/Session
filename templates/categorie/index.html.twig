@@ -6,8 +6,23 @@
 
     <h1>Catégories : </h1>
 
-    {% for categorie in categories %}
-        <a href="">{{categorie.nom}}</a><br>
-    {% endfor %}
+    <a href="{{path('new_categorie')}}">Ajouter catégorie</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Catégorie</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie in categories %}
+                <tr>
+                    <td><a href="">{{categorie.nom}}</a></td>
+                    <td><a href="{{path('edit_categorie', {'id' : categorie.id})}}">Modifier</a> <a href="{{path('delete_categorie', {'id' : categorie.id})}}">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}
