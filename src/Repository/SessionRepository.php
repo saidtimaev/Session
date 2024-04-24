@@ -36,6 +36,28 @@ class SessionRepository extends ServiceEntityRepository
            ;
        }
 
+       public function findSessionsPasseesStagiaire($value, $id): array
+       {
+            $em = $this->getEntityManager();
+            $qb = $em->createQueryBuilder();
+
+            
+            // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+            $qb->select('session.intitule','session.dateDebut','session.dateFin')
+                ->from('App\Entity\Session', 'session')
+                ->innerJoin('session.stagiaires', 'stagiaires')
+                ->where('stagiaires.id = :id')
+                ->where('stagiaires.id = :id')
+                ->setParameter('id', $id)
+                ->setParameter('id', $id);
+            
+            
+            
+            // renvoyer le résultat
+            $query = $qb->getQuery();
+            return $query->getResult();
+       }
+
               /**
         * @return Session[] Returns an array of Session objects
         */
@@ -67,9 +89,9 @@ class SessionRepository extends ServiceEntityRepository
         public function StagiairesNonInscrits($session_id)
     {
         $em = $this->getEntityManager();
-        $sub = $em->createQueryBuilder();
+        $qb = $em->createQueryBuilder();
 
-        $qb = $sub;
+        
         // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
         $qb->select('s')
             ->from('App\Entity\Stagiaire', 's')
