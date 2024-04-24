@@ -22,27 +22,23 @@ class FormateurRepository extends ServiceEntityRepository
     }
 
 
-    // public function NbSessionsFormateurs($dateActuelle)
-    // {
-    //     $conn = $this->getEntityManager()->getConnection();
+    public function NbSessionsFormateurs($dateActuelle)
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
-    //     $sql = '
-    //         SELECT stagiaire_id as id, nom, prenom,
-    //         (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_debut < :dateActuelle AND date_fin > :dateActuelle GROUP BY stagiaire_id) AS sessionEnCours,
-    //         (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_fin < :dateActuelle GROUP BY stagiaire_id) AS sessionPassees,
-    //         (SELECT COUNT(*) FROM session_stagiaire INNER JOIN session ON session_stagiaire.session_id = session.id WHERE stagiaire_id = stagiaire.id AND date_debut > :dateActuelle GROUP BY stagiaire_id) AS sessionPrevues
-    //         FROM session_stagiaire
-    //         INNER JOIN session ON session_stagiaire.session_id = session.id
-    //         INNER JOIN stagiaire ON session_stagiaire.stagiaire_id = stagiaire.id
-    //         GROUP BY stagiaire_id
-    //         ORDER BY nom ASC
-    //     ';
+        $sql = '
+        SELECT formateur.id, nom, prenom,
+        ( SELECT COUNT(session.id) FROM session WHERE session.formateur_id = formateur.id AND session.date_debut > :dateActuelle) as sessionsPrevues,
+        ( SELECT COUNT(session.id) FROM session WHERE session.formateur_id = formateur.id AND session.date_debut < :dateActuelle AND session.date_fin > :dateActuelle) as sessionsEnCours,
+        ( SELECT COUNT(session.id) FROM session WHERE session.formateur_id = formateur.id AND session.date_fin < :dateActuelle) as sessionsPassees
+        FROM formateur
+        ';
 
-    //     $resultSet = $conn->executeQuery($sql, ['dateActuelle' => $dateActuelle]);
+        $resultSet = $conn->executeQuery($sql, ['dateActuelle' => $dateActuelle]);
 
-    //     return $resultSet->fetchAllAssociative();
+        return $resultSet->fetchAllAssociative();
 
-    // }
+    }
 
     //    /**
     //     * @return Formateur[] Returns an array of Formateur objects

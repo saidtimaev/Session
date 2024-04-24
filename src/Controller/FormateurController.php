@@ -16,14 +16,14 @@ class FormateurController extends AbstractController
     #[Route('/formateur', name: 'app_formateur')]
     public function index(FormateurRepository $formateurRepository): Response
     {
-        $formateurs = $formateurRepository->findBy([],['nom'=>'ASC']);
+       
 
-        // $dateActuelle = new \DateTime();
+        $dateActuelle = new \DateTime();
 
-        // $formateursSessionsPrevues = $formateurRepository->NbSessionsFormateurs($dateActuelle->format('Y-m-d'));
+        $formateursSessionsPrevues = $formateurRepository->NbSessionsFormateurs($dateActuelle->format('Y-m-d'));
         
         return $this->render('formateur/index.html.twig', [
-            'formateurs'=> $formateurs
+            'formateursSessionsPrevues'=> $formateursSessionsPrevues
         ]);
     }
 
