@@ -19,7 +19,7 @@
             {% for module in categorie.modulees %}
                 <tr>
                     <td>{{module.intitule}}</td>
-                    <td><a href="">X</a></td>
+                    <td><a href="{{path('delete_modulee', {'id' : module.id})}}">X</a></td>
                 </tr>
             {% endfor %}
         </tbody>

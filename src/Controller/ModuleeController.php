@@ -83,11 +83,13 @@ class ModuleeController extends AbstractController
 
     #[Route('/modulee/{id}/delete', name:'delete_modulee')]
      public function delete(Modulee $modulee, EntityManagerInterface $entityManager){
+
+        $categorie = $modulee->getCategorie()->getId();
          
          $entityManager->remove($modulee);
          $entityManager->flush();
  
-         return $this->redirectToRoute('app_modulee');
+         return $this->redirectToRoute('show_categorie', ['id' => $categorie]);
  
      }
 }

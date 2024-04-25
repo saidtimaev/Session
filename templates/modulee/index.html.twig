@@ -20,7 +20,7 @@
             {% for modulee in modulees %}
                 <tr>
                     <td>{{modulee.intitule}}<br></td>
-                    <td><a href="">{{modulee.categorie.nom}}</a></td>
+                    <td><a href="{{path('show_categorie', {'id' : modulee.categorie.id})}}">{{modulee.categorie.nom}}</a></td>
                     <td><a href="{{path('edit_modulee', {'id' : modulee.id})}}">Modifier</a> <a href="{{path('delete_modulee', {'id' : modulee.id})}}">Supprimer</a></td>
                 </tr>
             {% endfor %}
