@@ -23,10 +23,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SessionController extends AbstractController
 {
     
-
-    
-   
-
     #[Route('/session/{id}', name: 'show_session')]
 
     public function show(Session $session, SessionRepository $sessionRepository, EntityManagerInterface $entityManager, Request $request): Response

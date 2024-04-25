@@ -43,15 +43,13 @@ class SessionRepository extends ServiceEntityRepository
 
             
             // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
-            $qb->select('session.intitule','session.dateDebut','session.dateFin')
+            $qb->select('session')
                 ->from('App\Entity\Session', 'session')
                 ->innerJoin('session.stagiaires', 'stagiaires')
                 ->where('stagiaires.id = :id')
-                ->where('stagiaires.id = :id')
+                ->andWhere('session.dateFin < :dateActuelle')
                 ->setParameter('id', $id)
-                ->setParameter('id', $id);
-            
-            
+                ->setParameter('dateActuelle', $value);
             
             // renvoyer le résultat
             $query = $qb->getQuery();
@@ -74,6 +72,27 @@ class SessionRepository extends ServiceEntityRepository
             ;
         }
 
+        public function findSessionsEnCoursStagiaire($value, $id): array
+       {
+            $em = $this->getEntityManager();
+            $qb = $em->createQueryBuilder();
+
+            
+            // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+            $qb->select('session')
+                ->from('App\Entity\Session', 'session')
+                ->innerJoin('session.stagiaires', 'stagiaires')
+                ->where('stagiaires.id = :id')
+                ->andWhere('session.dateDebut < :dateActuelle')
+                ->andWhere('session.dateFin > :dateActuelle')
+                ->setParameter('id', $id)
+                ->setParameter('dateActuelle', $value);
+            
+            // renvoyer le résultat
+            $query = $qb->getQuery();
+            return $query->getResult();
+       }
+
         public function findSessionsPrevues($value): array
         {
             return $this->createQueryBuilder('s')
@@ -85,6 +104,26 @@ class SessionRepository extends ServiceEntityRepository
                 ->getResult()
             ;
         }
+
+        public function findSessionsPrevuesStagiaire($value, $id): array
+       {
+            $em = $this->getEntityManager();
+            $qb = $em->createQueryBuilder();
+
+            
+            // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+            $qb->select('session')
+                ->from('App\Entity\Session', 'session')
+                ->innerJoin('session.stagiaires', 'stagiaires')
+                ->where('stagiaires.id = :id')
+                ->andWhere('session.dateDebut > :dateActuelle')
+                ->setParameter('id', $id)
+                ->setParameter('dateActuelle', $value);
+            
+            // renvoyer le résultat
+            $query = $qb->getQuery();
+            return $query->getResult();
+       }
 
         public function StagiairesNonInscrits($session_id)
     {

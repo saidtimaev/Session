@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Stagiaire;
 use App\Form\StagiaireType;
+use App\Repository\SessionRepository;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,10 +72,23 @@ class StagiaireController extends AbstractController
     }
 
     #[Route('stagiaire/{id}', name: 'show_stagiaire')]
-    public function show(Stagiaire $stagiaire){
+    public function show(Stagiaire $stagiaire, SessionRepository $sessionRepository){
+
+        $dateActuelle = new \DateTime();
         
+        $sessionsPassees = $sessionRepository->findSessionsPasseesStagiaire($dateActuelle, $stagiaire);
+        
+        $sessionsEnCours = $sessionRepository->findSessionsEnCoursStagiaire($dateActuelle, $stagiaire);
+
+        $sessionsPrevues = $sessionRepository->findSessionsPrevuesStagiaire($dateActuelle, $stagiaire);
+
+
+
         return $this->render('stagiaire/show.html.twig', [
-            'stagiaire'=> $stagiaire
+            'stagiaire'=> $stagiaire,
+            'sessionsPassees' => $sessionsPassees,
+            'sessionsPrevues' => $sessionsPrevues,
+            'sessionsEnCours' => $sessionsEnCours
         ]);
     }
 
