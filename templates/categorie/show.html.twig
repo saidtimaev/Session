@@ -5,8 +5,8 @@
 {% block body %}
 
     <h1>Modules de la catégorie {{categorie.nom}} :</h1>
-
-    <a href="">Ajouter un module</a> <br>
+    
+    <a href="{{path('new_modulee_cat', {'id' : categorie.id})}}">Ajouter un module</a> <br>
     
     <table class="table table-striped table-bordered">
         <thead>

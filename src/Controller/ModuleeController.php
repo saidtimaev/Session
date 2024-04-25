@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Modulee;
+use App\Entity\Categorie;
 use App\Form\ModuleeType;
+use App\Form\ModuleeCatType;
 use App\Repository\ModuleeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,33 +26,58 @@ class ModuleeController extends AbstractController
     }
 
     #[Route('/modulee/new', name:'new_modulee')]
+    #[Route('/modulee/{id}/new', name:'new_modulee_cat')]
     #[Route('/modulee/{id}/edit', name:'edit_modulee')]
-    public function new_edit(Modulee $modulee = null, Request $request, EntityManagerInterface $entityManager): Response{
+    public function new_edit(Modulee $modulee = null, Categorie $categorie = null, Request $request, EntityManagerInterface $entityManager): Response{
 
         if(!$modulee){
             $modulee = new Modulee();   
         }
 
-
-        // Création du formulaire d'ajout ou d'édition
-        $form = $this->createForm(ModuleeType::class, $modulee);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        
+        if(!$categorie){
             
-            $modulee = $form->getData();
-            // Prepare PDO
-           
-            $entityManager->persist($modulee);
-            // Execute PDO
-            $entityManager->flush();
+            // Création du formulaire d'ajout ou d'édition
+            $form = $this->createForm(ModuleeType::class, $modulee);
 
-            // On passe l'id de la formation pour le redirect sur les modules de la formation
-            return $this->redirectToRoute('app_modulee');
-        }
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                
+                $modulee = $form->getData();
+                // Prepare PDO
+            
+                $entityManager->persist($modulee);
+                // Execute PDO
+                $entityManager->flush();
+
+                // On passe l'id de la formation pour le redirect sur les modules de la formation
+                return $this->redirectToRoute('app_modulee');
+            } 
+        } else {
+
+            // Création du formulaire d'ajout ou d'édition
+            $form = $this->createForm(ModuleeCatType::class, $modulee);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                
+                $modulee = $form->getData();
+                // Prepare PDO
+
+                $modulee->setCategorie($categorie);
+            
+                $entityManager->persist($modulee);
+                // Execute PDO
+                $entityManager->flush();
+
+                // On passe l'id de la formation pour le redirect sur les modules de la formation
+                return $this->redirectToRoute('show_categorie', ['id' => $categorie->getId()]);
+            } 
+        }      
 
         return $this->render('modulee/new.html.twig', [
             'formAddModulee' => $form,
+            'categorie' => $categorie
         ]);
     }
 
