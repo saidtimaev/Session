@@ -9,20 +9,20 @@
     <a href="">Supprimer</a> <br>
     <p>Sexe : {{formateur.sexe}} </p>
     <p>Courriel : {{formateur.email}} </p>
-    
-    <h3>Sessions</h3>
+
+    <h3>Sessions en cours</h3>
     {# Liste des sessions auquelles il participe #}
-    {% if formateur.sessions | length > 0  %}
+    {% if sessionsEnCours | length > 0  %}
         <table class="table table-striped table-bordered">
             <thead>  
                 <tr class="table-primary">
-                    <th>Sessions</th>
+                    <th>Session</th>
                     <th>Début</th>
                     <th>Fin</th>
                 </tr>
             </thead>
             <tbody>
-                {% for session in formateur.sessions %}
+                {% for session in sessionsEnCours %}
                     <tr>
                         <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a></td>
                         <td>{{session.dateDebut|date("d/m/Y")}}</td>
@@ -32,7 +32,57 @@
             </tbody>
         </table>
     {% else %}    
-        <p>{{formateur.prenom ~ ' ' ~ formateur.nom}} ne participe à aucune session</p>
+        <p>{{formateur.prenom ~ ' ' ~ formateur.nom}} n'a aucune session en cours</p>
+    {% endif %}
+
+    <h3>Sessions prévues</h3>
+    {# Liste des sessions auquelles il participe #}
+    {% if sessionsPrevues | length > 0  %}
+        <table class="table table-striped table-bordered">
+            <thead>  
+                <tr class="table-primary">
+                    <th>Session</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in sessionsPrevues %}
+                    <tr>
+                        <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a></td>
+                        <td>{{session.dateDebut|date("d/m/Y")}}</td>
+                        <td>{{session.dateFin|date("d/m/Y")}}</td>
+                    </tr> <br>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}    
+        <p>{{formateur.prenom ~ ' ' ~ formateur.nom}} n'a aucune session prévue</p>
+    {% endif %}
+    
+    <h3>Sessions passées</h3>
+    {# Liste des sessions auquelles il participe #}
+    {% if sessionsPassees | length > 0  %}
+        <table class="table table-striped table-bordered">
+            <thead>  
+                <tr class="table-primary">
+                    <th>Session</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in sessionsPassees %}
+                    <tr>
+                        <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a></td>
+                        <td>{{session.dateDebut|date("d/m/Y")}}</td>
+                        <td>{{session.dateFin|date("d/m/Y")}}</td>
+                    </tr> <br>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}    
+        <p>{{formateur.prenom ~ ' ' ~ formateur.nom}} n'a participé à aucune session</p>
     {% endif %}
 
 {% endblock %}

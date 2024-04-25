@@ -56,6 +56,26 @@ class SessionRepository extends ServiceEntityRepository
             return $query->getResult();
        }
 
+       public function findSessionsPasseesFormateur($value, $id): array
+       {
+            $em = $this->getEntityManager();
+            $qb = $em->createQueryBuilder();
+
+            
+            // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+            $qb->select('session')
+                ->from('App\Entity\Session', 'session')
+                ->innerJoin('session.formateur', 'formateur')
+                ->where('formateur.id = :id')
+                ->andWhere('session.dateFin < :dateActuelle')
+                ->setParameter('id', $id)
+                ->setParameter('dateActuelle', $value);
+            
+            // renvoyer le résultat
+            $query = $qb->getQuery();
+            return $query->getResult();
+       }
+
               /**
         * @return Session[] Returns an array of Session objects
         */
@@ -93,6 +113,27 @@ class SessionRepository extends ServiceEntityRepository
             return $query->getResult();
        }
 
+       public function findSessionsEnCoursFormateur($value, $id): array
+       {
+            $em = $this->getEntityManager();
+            $qb = $em->createQueryBuilder();
+
+            
+            // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+            $qb->select('session')
+                ->from('App\Entity\Session', 'session')
+                ->innerJoin('session.formateur', 'formateur')
+                ->where('formateur.id = :id')
+                ->andWhere('session.dateDebut < :dateActuelle')
+                ->andWhere('session.dateFin > :dateActuelle')
+                ->setParameter('id', $id)
+                ->setParameter('dateActuelle', $value);
+            
+            // renvoyer le résultat
+            $query = $qb->getQuery();
+            return $query->getResult();
+       }
+
         public function findSessionsPrevues($value): array
         {
             return $this->createQueryBuilder('s')
@@ -116,6 +157,26 @@ class SessionRepository extends ServiceEntityRepository
                 ->from('App\Entity\Session', 'session')
                 ->innerJoin('session.stagiaires', 'stagiaires')
                 ->where('stagiaires.id = :id')
+                ->andWhere('session.dateDebut > :dateActuelle')
+                ->setParameter('id', $id)
+                ->setParameter('dateActuelle', $value);
+            
+            // renvoyer le résultat
+            $query = $qb->getQuery();
+            return $query->getResult();
+       }
+
+       public function findSessionsPrevuesFormateur($value, $id): array
+       {
+            $em = $this->getEntityManager();
+            $qb = $em->createQueryBuilder();
+
+            
+            // sélectionner tous les stagiaires d'une session dont l'id est passé en paramètre
+            $qb->select('session')
+                ->from('App\Entity\Session', 'session')
+                ->innerJoin('session.formateur', 'formateur')
+                ->where('formateur.id = :id')
                 ->andWhere('session.dateDebut > :dateActuelle')
                 ->setParameter('id', $id)
                 ->setParameter('dateActuelle', $value);

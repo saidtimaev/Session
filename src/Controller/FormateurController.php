@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Formateur;
 use App\Form\FormateurType;
 use App\Repository\FormateurRepository;
+use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,10 +69,23 @@ class FormateurController extends AbstractController
      }
 
     #[Route('formateur/{id}', name: 'show_formateur')]
-    public function show(Formateur $formateur){
+    public function show(Formateur $formateur, SessionRepository $sessionRepository){
+
+        $dateActuelle = new \DateTime();
+        
+        $sessionsPassees = $sessionRepository->findSessionsPasseesFormateur($dateActuelle, $formateur);
+
+        $sessionsEnCours = $sessionRepository->findSessionsEnCoursFormateur($dateActuelle, $formateur);
+
+        $sessionsPrevues = $sessionRepository->findSessionsPrevuesFormateur($dateActuelle, $formateur);
+
+        
         
         return $this->render('formateur/show.html.twig', [
-            'formateur'=> $formateur
+            'formateur'=> $formateur,
+            'sessionsPassees' => $sessionsPassees,
+            'sessionsEnCours' => $sessionsEnCours,
+            'sessionsPrevues' => $sessionsPrevues
         ]);
     }
 }
