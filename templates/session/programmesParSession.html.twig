@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{session.intitule}}{% endblock %}
+
+{% block body %}
+
+    <h1>Programme de la session {{session.intitule}} : </h1>
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Module</th>
+                <th scope="col">Durée</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for session in formation.sessions %}
+                <tr>
+                    <td>{{session.module.intitule}}</td>                 
+                    <td>{{session.module.duree}}</td>                              
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

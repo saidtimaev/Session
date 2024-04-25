@@ -4,11 +4,11 @@
 
 {% block body %}
     <h1>Détails de la session {{session.intitule}}</h1>
-    <a href="">Modifier</a> <br>
-    <a href="">Supprimer</a> <br>
+    <a href="{{ path('edit_session', {'id': session.id})}}">Modifier</a> <br>
+    <a href="{{ path('delete_session', {'id': session.id})}}">Supprimer</a> <br>
     <p>Total des places : {{session.places}} </p>
-    <p>Places reservées : ? </p>
-    <p>Places disponibles : ? </p>
+    <p>Places reservées : {{session.stagiaires|length}}  </p>
+    <p>Places disponibles : {{session.places - session.stagiaires|length}} </p>
     <p>Début : {{session.dateDebut|date("d/m/Y")}} </p>
     <p>Fin : {{session.dateFin|date("d/m/Y")}} </p>
 

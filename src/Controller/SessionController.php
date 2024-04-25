@@ -110,8 +110,11 @@ class SessionController extends AbstractController
         if(!$session){
             $session = new Session();   
         }
+        else{
+            $formation = $session->getFormation();
+        }
 
-
+      
         // Création du formulaire d'ajout ou d'édition
         $form = $this->createForm(SessionType::class, $session);
 

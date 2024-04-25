@@ -63,4 +63,13 @@ class CategorieController extends AbstractController
          return $this->redirectToRoute('app_categorie');
  
      }
+
+     #[Route('categorie/{id}', name: 'show_categorie')]
+    public function show(Categorie $categorie, CategorieRepository $categorieRepository){
+
+        
+        return $this->render('categorie/show.html.twig', [
+            'categorie'=> $categorie
+        ]);
+    }
 }

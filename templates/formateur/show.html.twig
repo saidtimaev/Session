@@ -5,8 +5,8 @@
 {% block body %}
     {# Infos du formateur #}
     <h1>Informations de {{formateur.prenom ~ ' ' ~ formateur.nom}}</h1>
-    <a href="">Modifier</a> <br>
-    <a href="">Supprimer</a> <br>
+    <a href="{{ path('edit_formateur', {'id' : formateur.id})}}">Modifier</a> <br>
+    <a href="{{ path('delete_formateur', {'id' : formateur.id})}}">Supprimer</a> <br>
     <p>Sexe : {{formateur.sexe}} </p>
     <p>Courriel : {{formateur.email}} </p>
 
