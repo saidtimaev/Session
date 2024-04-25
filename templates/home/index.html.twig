@@ -15,6 +15,11 @@
                     <th>Session</th>
                     <th>Date de début</th>
                     <th>Date de fin</th>
+                    <th>Nb places total</th>
+                    <th>Nb places réservées</th>
+                    <th>Nb places disponibles</th>
+                    <th scope="col">Details du programme</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +28,11 @@
                             <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a><br></td>
                             <td>{{session.dateDebut|date("d/m/Y")}}</td>
                             <td>{{session.dateFin|date("d/m/Y")}}</td>                 
+                            <td>{{session.places}}</td>                 
+                            <td>{{session.stagiaires|length}}</td>                 
+                            <td>{{session.places - session.stagiaires|length}}</td>   
+                            <td><a href="">Afficher</a></td>
+
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -40,6 +50,11 @@
                     <th>Session</th>
                     <th>Date de début</th>
                     <th>Date de fin</th>
+                    <th>Nb places total</th>
+                    <th>Nb places réservées</th>
+                    <th>Nb places disponibles</th>
+                    <th scope="col">Details du programme</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -48,6 +63,11 @@
                             <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a><br></td>
                             <td>{{session.dateDebut|date("d/m/Y")}}</td>
                             <td>{{session.dateFin|date("d/m/Y")}}</td>                 
+                            <td>{{session.places}}</td>                 
+                            <td>{{session.stagiaires|length}}</td>                 
+                            <td>{{session.places - session.stagiaires|length}}</td>     
+                            <td><a href="">Afficher</a></td>
+                     
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -66,14 +86,24 @@
                     <th>Session</th>
                     <th>Date de début</th>
                     <th>Date de fin</th>
+                    <th>Nb places total</th>
+                    <th>Nb places réservées</th>
+                    <th>Nb places disponibles</th>
+                    <th scope="col">Details du programme</th>
+
                 </tr>
             </thead>
             <tbody>
                 {% for session in sessionsPassees %}
                     <tr>
                         <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a><br></td>
-                        <td>{{session.dateDebut|date("d/m/Y")}}</td>
-                        <td>{{session.dateFin|date("d/m/Y")}}</td>                 
+                            <td>{{session.dateDebut|date("d/m/Y")}}</td>
+                            <td>{{session.dateFin|date("d/m/Y")}}</td>                 
+                            <td>{{session.places}}</td>                 
+                            <td>{{session.stagiaires|length}}</td>                 
+                            <td>{{session.places - session.stagiaires|length}}</td>       
+                            <td><a href="">Afficher</a></td>
+         
                     </tr>
                 {% endfor %}
             </tbody>

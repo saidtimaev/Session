@@ -12,8 +12,8 @@
         <thead>
             <tr class="table-primary">
                 <th>Stagiaire</th>
-                <th>Nombre de sessions prévues</th>
                 <th>Nombre de sessions en cours</th>
+                <th>Nombre de sessions prévues</th>
                 <th>Nombre de sessions passées</th>
                 <th>Action</th>
                 
@@ -23,8 +23,8 @@
             {% for stagiaire in stagiairesSessionsPrevues %}
                 <tr>
                     <td><a href="{{path('show_stagiaire', {'id' : stagiaire['id']})}}">{{stagiaire['nom']|upper}} {{stagiaire['prenom']}}</a><br></td>
-                    <td>{{ stagiaire['sessionPrevues'] ? stagiaire['sessionPrevues'] : '0' }}</td>
                     <td>{{ stagiaire['sessionEnCours'] ? stagiaire['sessionEnCours'] : '0' }}</td>
+                    <td>{{ stagiaire['sessionPrevues'] ? stagiaire['sessionPrevues'] : '0' }}</td>
                     <td>{{ stagiaire['sessionPassees'] ? stagiaire['sessionPassees'] : '0' }}</td>
                     <td><a href="{{ path('edit_stagiaire', {'id' : stagiaire['id']})}}">Modifier</a> <a href="{{ path('delete_stagiaire', {'id' : stagiaire['id']})}}">Supprimer</a></td>
                 </tr>

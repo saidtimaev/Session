@@ -14,7 +14,9 @@
                 <th scope="col">Session</th>
                 <th scope="col">Date de début</th>
                 <th scope="col">Date de fin</th>
-                <th scope="col">Nombre de places total</th>
+                <th>Nb places total</th>
+                <th>Nb places réservées</th>
+                <th>Nb places disponibles</th>
                 <th scope="col">Details du programme</th>
                 <th scope="col">Action</th>
             </tr>
@@ -25,7 +27,9 @@
                     <th scope="row"><a href="{{ path('show_session', {'id': session.id})}}">{{session.intitule}}</a><br></th>
                     <td>{{session.dateDebut|date("d/m/Y")}}</td>
                     <td>{{session.dateFin|date("d/m/Y")}}</td>
-                    <td>{{session.places}}</td>
+                    <td>{{session.places}}</td>                 
+                    <td>{{session.stagiaires|length}}</td>                 
+                    <td>{{session.places - session.stagiaires|length}}</td> 
                     <td><a href="">Afficher</a></td>
                     <td><a href="{{ path('edit_session', {'id': session.id})}}">Modifier</a> <a href="{{ path('delete_session', {'id': session.id})}}">Supprimer</a></td>
                 </tr>

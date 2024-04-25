@@ -19,6 +19,8 @@
                     <th>Session</th>
                     <th>Début</th>
                     <th>Fin</th>
+                    <th scope="col">Details du programme</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +29,8 @@
                         <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a></td>
                         <td>{{session.dateDebut|date("d/m/Y")}}</td>
                         <td>{{session.dateFin|date("d/m/Y")}}</td>
+                        <td><a href="">Afficher</a></td>
+
                     </tr> <br>
                 {% endfor %}
             </tbody>
@@ -44,6 +48,8 @@
                     <th>Session</th>
                     <th>Début</th>
                     <th>Fin</th>
+                    <th scope="col">Details du programme</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +58,8 @@
                         <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a></td>
                         <td>{{session.dateDebut|date("d/m/Y")}}</td>
                         <td>{{session.dateFin|date("d/m/Y")}}</td>
+                        <td><a href="">Afficher</a></td>
+
                     </tr> <br>
                 {% endfor %}
             </tbody>
@@ -69,6 +77,8 @@
                     <th>Session</th>
                     <th>Début</th>
                     <th>Fin</th>
+                    <th scope="col">Details du programme</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -77,6 +87,8 @@
                         <td><a href="{{path('show_session', {'id' : session.id})}}">{{session.intitule}}</a></td>
                         <td>{{session.dateDebut|date("d/m/Y")}}</td>
                         <td>{{session.dateFin|date("d/m/Y")}}</td>
+                        <td><a href="">Afficher</a></td>
+
                     </tr> <br>
                 {% endfor %}
             </tbody>
