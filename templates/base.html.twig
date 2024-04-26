@@ -16,6 +16,11 @@
     </head>
     <body>
         <header>
+            {% for message in app.flashes('note') %}
+                <div class="flash-notice">
+                    {{ message }}
+                </div>
+            {% endfor %}
             {% if app.user %}
                 <div class="mb-3">
                     Vous êtes connecté en tant que ADMIN, <a href="{{ path('app_logout') }}">Se déconnecter</a>
