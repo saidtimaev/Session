@@ -14,6 +14,7 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(SessionRepository $sessionRepository): Response
     {
+
         $dateActuelle = new \DateTime();
 
         $sessionsPassees = $sessionRepository->findSessionsPassees($dateActuelle->format('Y-m-d'));
