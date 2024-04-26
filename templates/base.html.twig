@@ -16,8 +16,14 @@
     </head>
     <body>
         <header>
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes connecté en tant que ADMIN, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </div>
+            {% endif %}
             <nav>
                 <ul>
+                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
                     <li><a href="{{ path('app_home') }}">Accueil</a></li>
                     <li><a href="{{ path('app_formation') }}">Formations</a></li>
                     <li><a href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
