@@ -15,12 +15,17 @@
         {% endblock %}
     </head>
     <body>
+        {% for message in app.flashes('success') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('failure') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
         <header>
-            {% for message in app.flashes('note') %}
-                <div class="flash-notice">
-                    {{ message }}
-                </div>
-            {% endfor %}
             {% if app.user %}
                 <div class="mb-3">
                     Vous êtes connecté en tant que ADMIN, <a href="{{ path('app_logout') }}">Se déconnecter</a>

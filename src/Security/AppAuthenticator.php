@@ -45,6 +45,12 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+        // $request->getSession()->getFlashBag()->add('success','Connexion réussie');
+        // $this->addFlash('sucess','test');
+
+        // return $this->redirectToRoute('app_login');
+
+
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);

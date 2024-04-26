@@ -41,7 +41,9 @@ class FormationController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
+            $this->addFlash('success','Formation ajoutée!');
+
             $formation = $form->getData();
             // Prepare PDO
             $entityManager->persist($formation);
@@ -49,7 +51,7 @@ class FormationController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_formation');
-        }
+        } 
 
         return $this->render('formation/new.html.twig', [
             'formAddFormation' => $form,
