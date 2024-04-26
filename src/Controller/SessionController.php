@@ -139,6 +139,15 @@ class SessionController extends AbstractController
         ]);
     }
 
+    #[Route('/session/{id}/programme', name:'programme')]
+    public function afficherProgramme(Session $session): Response{
+
+        return $this->render('session/programmesParSession.html.twig', [
+            'session' => $session,
+
+        ]);
+    }
+
 
 }
 

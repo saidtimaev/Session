@@ -31,7 +31,7 @@
                             <td>{{session.places}}</td>                 
                             <td>{{session.stagiaires|length}}</td>                 
                             <td>{{session.places - session.stagiaires|length}}</td>   
-                            <td><a href="">Afficher</a></td>
+                            <td><a href="{{path('programme', {'id' : session.id})}}">Afficher</a></td>
 
                         </tr>
                     {% endfor %}
@@ -66,7 +66,7 @@
                             <td>{{session.places}}</td>                 
                             <td>{{session.stagiaires|length}}</td>                 
                             <td>{{session.places - session.stagiaires|length}}</td>     
-                            <td><a href="">Afficher</a></td>
+                            <td><a href="{{path('programme', {'id' : session.id})}}">Afficher</a></td>
                      
                         </tr>
                     {% endfor %}
@@ -102,7 +102,7 @@
                             <td>{{session.places}}</td>                 
                             <td>{{session.stagiaires|length}}</td>                 
                             <td>{{session.places - session.stagiaires|length}}</td>       
-                            <td><a href="">Afficher</a></td>
+                            <td><a href="{{path('programme', {'id' : session.id})}}">Afficher</a></td>
          
                     </tr>
                 {% endfor %}

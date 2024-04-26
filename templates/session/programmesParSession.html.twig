@@ -14,10 +14,10 @@
             </tr>
         </thead>
         <tbody>
-            {% for session in formation.sessions %}
+            {% for programme in session.programmes %}
                 <tr>
-                    <td>{{session.module.intitule}}</td>                 
-                    <td>{{session.module.duree}}</td>                              
+                    <td>{{programme.modulee.intitule}}</td>                 
+                    <td>{{programme.duree}}</td>                              
                 </tr>
             {% endfor %}
         </tbody>
