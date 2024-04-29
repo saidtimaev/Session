@@ -44,6 +44,12 @@ class ModuleeController extends AbstractController
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+
+                if(!$modulee->getId()){
+                    $this->addFlash('success','Module ajouté!');
+                } else {
+                    $this->addFlash('success','Module modifié!');
+                }
                 
                 $modulee = $form->getData();
                 // Prepare PDO
@@ -62,6 +68,12 @@ class ModuleeController extends AbstractController
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+
+                if(!$modulee->getId()){
+                    $this->addFlash('success','Module ajouté!');
+                } else {
+                    $this->addFlash('success','Module modifié!');
+                }
                 
                 $modulee = $form->getData();
                 // Prepare PDO
@@ -90,7 +102,9 @@ class ModuleeController extends AbstractController
          
          $entityManager->remove($modulee);
          $entityManager->flush();
- 
+
+         $this->addFlash('success','Module supprimé!');
+
          return $this->redirectToRoute('show_categorie', ['id' => $categorie]);
  
      }
