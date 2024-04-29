@@ -42,7 +42,11 @@ class FormationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->addFlash('success','Formation ajoutée!');
+            if(!$formation){
+                $this->addFlash('success','Formation ajoutée!');
+            }
+
+            $this->addFlash('success','Formation modifiée!');
 
             $formation = $form->getData();
             // Prepare PDO
@@ -64,6 +68,8 @@ class FormationController extends AbstractController
          
          $entityManager->remove($formation);
          $entityManager->flush();
+
+         $this->addFlash('success','Formation supprimée!');
  
          return $this->redirectToRoute('app_formation');
  
