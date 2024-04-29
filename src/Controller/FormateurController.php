@@ -44,6 +44,13 @@ class FormateurController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
+            if(!$formateur){
+                $this->addFlash('success','Infos du formateur modifiées!');
+            }
+            
+            $this->addFlash('success','Formateur ajouté!');
             
             $formateur = $form->getData();
             // Prepare PDO
@@ -65,6 +72,8 @@ class FormateurController extends AbstractController
          
          $entityManager->remove($formateur);
          $entityManager->flush();
+
+         $this->addFlash('success','Formateur supprimé!');
  
          return $this->redirectToRoute('app_formateur');
  

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Formateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -16,9 +17,27 @@ class FormateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('email', EmailType::class)
+            ->add('nom', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir un nom!'
+                    ])
+                ],
+            ])
+            ->add('prenom', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir un prénom!'
+                    ])
+                ],
+            ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir un email!'
+                    ])
+                ],
+            ])
             ->add('sexe', ChoiceType::class, [
                 'choices' => [
                     'Masculin' => 'M',
