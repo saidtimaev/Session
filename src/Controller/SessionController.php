@@ -34,6 +34,8 @@ class SessionController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
             
             $programme = $form->getData();
             // Prepare PDO
@@ -65,6 +67,8 @@ class SessionController extends AbstractController
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
+        $this->addFlash('success','Stagiaire supprimé de la session!');
+
         return $this->redirectToRoute('show_session',['id'=>$session->getId()]); 
     }  
 
@@ -78,6 +82,8 @@ class SessionController extends AbstractController
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
+        $this->addFlash('success','Stagiaire ajouté à la session!');
+
         return $this->redirectToRoute('show_session',['id'=>$session->getId()]); 
     }  
 
@@ -89,6 +95,9 @@ class SessionController extends AbstractController
         $entityManager->remove($session);
         $entityManager->flush();
 
+        $this->addFlash('success','Session supprimée!');
+
+
         return $this->redirectToRoute('sessionsParFormation',['id' => $formation]);
    }
 
@@ -99,6 +108,8 @@ class SessionController extends AbstractController
 
         $entityManager->remove($programme);
         $entityManager->flush();
+
+        $this->addFlash('success','Module supprimé de la session!');
 
         return $this->redirectToRoute('show_session',['id' => $session]);
    }
@@ -121,6 +132,12 @@ class SessionController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if(!$session->getId()){
+                $this->addFlash('success','Session ajoutée!');
+            } else {
+                $this->addFlash('success','Session modifiée!');
+            }
             
             $session = $form->getData();
             // Prepare PDO

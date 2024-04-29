@@ -11,13 +11,25 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
 
 class ProgrammeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('duree', IntegerType::class)
+            ->add('duree', IntegerType::class, [
+                'constraints' => [
+                    new Positive([
+                        'message' => 'La durée doit être supérieure à 0!'
+                    ]),
+                    new NotBlank([
+                        'message' => 'Veuillez saisir une durée!'
+                    ]),
+                    ],
+                    
+            ])
             ->add('modulee', EntityType::class, [
                 'class' => Modulee::class,
                 'choice_label' => 'intitule',
