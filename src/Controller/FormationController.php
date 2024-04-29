@@ -46,11 +46,12 @@ class FormationController extends AbstractController
 
             
 
-            if(!$formation){
+            if(!$formation->getId()){
                 $this->addFlash('success','Formation ajoutée!');
+            } else {
+                $this->addFlash('success','Formation modifiée!');
             }
 
-            $this->addFlash('success','Formation modifiée!');
 
             $formation = $form->getData();
             // Prepare PDO

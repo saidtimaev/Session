@@ -46,11 +46,12 @@ class FormateurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             
-            if(!$formateur){
+            if(!$formateur->getId()){
+                $this->addFlash('success','Formateur ajouté!');
+            } else {
                 $this->addFlash('success','Infos du formateur modifiées!');
             }
             
-            $this->addFlash('success','Formateur ajouté!');
             
             $formateur = $form->getData();
             // Prepare PDO

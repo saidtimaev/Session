@@ -39,6 +39,13 @@ class CategorieController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if(!$categorie->getId()){
+                $this->addFlash('success','Catégorie ajoutée!');
+            } else {
+                $this->addFlash('success','Catégorie modifiée!');
+            }
+            
             
             $categorie = $form->getData();
             // Prepare PDO
@@ -61,6 +68,8 @@ class CategorieController extends AbstractController
          
          $entityManager->remove($categorie);
          $entityManager->flush();
+
+         $this->addFlash('success','Catégorie supprimée!');
  
          return $this->redirectToRoute('app_categorie');
  
