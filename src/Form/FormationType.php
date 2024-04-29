@@ -20,7 +20,7 @@ class FormationType extends AbstractType
             ->add('intitule',  TextType::class , [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez saisir un titre formation !'
+                        'message' => 'Veuillez saisir un titre de formation !'
                     ]),
                     ],
                 'attr' => [
