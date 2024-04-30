@@ -39,6 +39,11 @@ class FormateurType extends AbstractType
                 ],
             ])
             ->add('sexe', ChoiceType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez choisir un sexe!'
+                    ])
+                ],
                 'choices' => [
                     'Masculin' => 'M',
                     'Féminin' => 'F'

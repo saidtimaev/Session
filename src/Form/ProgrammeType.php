@@ -20,17 +20,19 @@ class ProgrammeType extends AbstractType
     {
         $builder
             ->add('duree', IntegerType::class, [
+                'required' => false,
                 'constraints' => [
                     new Positive([
                         'message' => 'La durée doit être supérieure à 0!'
                     ]),
-                    new NotBlank([
-                        'message' => 'Veuillez saisir une durée!'
-                    ]),
                     ],
-                    
             ])
             ->add('modulee', EntityType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez choisir un module!'
+                    ]),
+                    ],
                 'class' => Modulee::class,
                 'choice_label' => 'intitule',
             ])

@@ -25,6 +25,11 @@ class ModuleeType extends AbstractType
                     ],
             ])
             ->add('categorie', EntityType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez choisir une catégorie de module!'
+                    ]),
+                    ],
                 'class' => Categorie::class,
                 'choice_label' => function ($categorie) {
                     return $categorie->getNom();

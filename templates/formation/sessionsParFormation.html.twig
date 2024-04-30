@@ -27,10 +27,16 @@
                     <th scope="row"><a href="{{ path('show_session', {'id': session.id})}}">{{session.intitule}}</a><br></th>
                     <td>{{session.dateDebut|date("d/m/Y")}}</td>
                     <td>{{session.dateFin|date("d/m/Y")}}</td>
-                    <td>{{session.places}}</td>                 
+                    <td>
+                        {% if session.places %}
+                            {{session.places}}
+                        {% else %}
+                            Non défini
+                        {% endif %}
+                    </td>                 
                     <td>{{session.stagiaires|length}}</td>                 
                     <td>{{session.places - session.stagiaires|length}}</td> 
-                    <td><a href="">Afficher</a></td>
+                    <td><a href="{{ path('programme', {'id' : session.id})}}">Afficher</a></td>
                     <td><a href="{{ path('edit_session', {'id': session.id})}}">Modifier</a> <a href="{{ path('delete_session', {'id': session.id})}}">Supprimer</a></td>
                 </tr>
             {% endfor %}

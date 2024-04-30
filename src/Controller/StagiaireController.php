@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Date;
 
 #[IsGranted('ROLE_USER')]
 class StagiaireController extends AbstractController
@@ -23,6 +24,7 @@ class StagiaireController extends AbstractController
         // dump($stagiaires->sessions);die;
 
         $dateActuelle = new \DateTime();
+        
 
         $stagiairesSessionsPrevues = $stagiaireRepository->NbSessionsStagiaires($dateActuelle->format('Y-m-d'));
 
@@ -38,12 +40,18 @@ class StagiaireController extends AbstractController
     // Ajout ou édition stagiaire
     public function new_edit( Stagiaire $stagiaire = null, Request $request, EntityManagerInterface $entityManager): Response{
 
+        $date = new \DateTime();
+        $day = new \DateInterval('P1D');
+        $date->sub($day);
+
+       
+
         if(!$stagiaire){
             $stagiaire = new Stagiaire();   
         }
 
         // Création du formulaire d'ajout ou d'édition
-        $form = $this->createForm(StagiaireType::class, $stagiaire);
+        $form = $this->createForm(StagiaireType::class, $stagiaire, ['date'=>$date]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
