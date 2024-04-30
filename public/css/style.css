@@ -1,0 +1,44 @@
+* {
+
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    box-sizing: border-box;
+
+}
+
+#wrapper{
+    height: 100vh;
+    padding-top: 50px;
+}
+
+.body{
+    display: flex;
+    flex-direction: row;   
+}
+
+main{
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin: auto ;
+}
+
+nav ul li{
+    list-style: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+nav ul li a{
+    text-decoration: none;
+}
+
+.connexion{
+    padding: 10px;
+    border: 1px solid blue;
+    border-radius: 10px;
+    width: 500px;
+    margin: auto;
+}

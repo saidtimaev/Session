@@ -15,41 +15,45 @@
         {% endblock %}
     </head>
     <body>
-        {% for message in app.flashes('success') %}
-            <div class="flash-notice">
-                {{ message }}
-            </div>
-        {% endfor %}
-        {% for message in app.flashes('failure') %}
-            <div class="flash-notice">
-                {{ message }}
-            </div>
-        {% endfor %}
-        <header>
-            {% if app.user %}
-                <div class="mb-3">
-                    Vous êtes connecté en tant que ADMIN, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        <div id="wrapper">
+            {% for message in app.flashes('success') %}
+                <div class="flash-notice">
+                    {{ message }}
                 </div>
-            {% endif %}
-            <nav>
-                <ul>
-                    <li><a href="{{ path('app_login') }}">Connexion</a></li>
-                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_formation') }}">Formations</a></li>
-                    <li><a href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
-                    <li><a href="{{ path('app_formateur') }}">Formateurs</a></li>
-                    <li><a href="{{ path('app_modulee') }}">Modules</a></li>
-                    <li><a href="{{ path('app_categorie') }}">Catégories de module</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            {% block body %}
-                
-            {% endblock %}
-        </main>
-        <footer>
-            <p>Session 2024</p>
-        </footer>
+            {% endfor %}
+            {% for message in app.flashes('failure') %}
+                <div class="flash-notice">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="body">
+                <header>
+                    <nav>
+                        <ul>
+                            {% if app.user %}
+                                <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                            {% endif %}
+                            {% if not app.user %}
+                                <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                            {% endif %}
+                            <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                            <li><a href="{{ path('app_formation') }}">Formations</a></li>
+                            <li><a href="{{ path('app_stagiaire') }}">Stagiaires</a></li>
+                            <li><a href="{{ path('app_formateur') }}">Formateurs</a></li>
+                            <li><a href="{{ path('app_modulee') }}">Modules</a></li>
+                            <li><a href="{{ path('app_categorie') }}">Catégories de module</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <main>
+                    {% block body %}
+                        
+                    {% endblock %}
+                </main>
+            </div>
+            <footer>
+                <p>Session 2024</p>
+            </footer>
+        </div>
     </body>
 </html>
